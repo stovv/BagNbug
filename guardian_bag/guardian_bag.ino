@@ -20,6 +20,8 @@ int PIN_BLINK = 9;
 int PIN_BLUETOOTH_1 = 10;
 int PIN_BLUETOOTH_2 = 11;
 
+bool is_locked = false;
+
 // the setup function runs once when you press reset or power the board
 void setup()
 {
@@ -30,6 +32,9 @@ void setup()
     blink = new Blink(PIN_BLINK, COUNT_LED);
     locker = new Lock(PIN_LOCKER);
     move_detector = new Move();
+    if (!move_detector->init()) {
+      Serial.print("ERROR: axcel not init");
+    }
     vibro = new Vibro(PIN_VIBRO);
 }
 
@@ -37,4 +42,8 @@ void setup()
 void loop()
 {
   //vibro->my_melody();
+    if (move_detector->check_moving(11.5))
+    {
+        is_locked = true;
+    }
 }
