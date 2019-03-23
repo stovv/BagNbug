@@ -7,6 +7,7 @@ public:
     ~Vibro();
     void run();
     void stop();
+    void my_melody();
 };
 
 Vibro::Vibro(int pin)
@@ -26,4 +27,16 @@ void Vibro::run(){
 
 void Vibro::stop(){
     digitalWrite(this->pin, LOW);
+}
+
+void Vibro::my_melody(){
+  run();
+  delay(1000); 
+  stop();
+  delay(500);
+  run();
+  delay(1000);
+  stop();
+  run();
+  delay(1000);
 }
