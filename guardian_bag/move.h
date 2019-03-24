@@ -17,7 +17,6 @@ class Move
 Move::Move(/* args */)
 {
     sensor = Mpu6050();
-    
     prev_magnitude = 0.0;
 }
 
@@ -28,7 +27,7 @@ bool Move::init()
     return true;
 }
 
-bool Move::check_moving(float k = 11.5)
+bool Move::check_moving(float k = 25.0)
 {
     accel = sensor.readAcceleration();
     data = sensor.readData();
@@ -36,10 +35,9 @@ bool Move::check_moving(float k = 11.5)
     float current_magnitude = accel.magnitude();
 
     float difference_magnitude = current_magnitude - prev_magnitude;
-
+    Serial.println(accel.magnitude());
     prev_magnitude = current_magnitude;
-    
-    if (difference_magnitude > k)
+    if (prev_magnitude > k)
         return true;
     return false;
 }

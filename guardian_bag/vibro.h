@@ -31,12 +31,12 @@ void Vibro::stop(){
 
 void Vibro::my_melody(){
   run();
-  delay(1000); 
+  delay(100); 
   stop();
-  delay(500);
+  delay(50);
   run();
-  delay(1000);
+  delay(100);
   stop();
   run();
-  delay(1000);
+  delay(50);
 }
